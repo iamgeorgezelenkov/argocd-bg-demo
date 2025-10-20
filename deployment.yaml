@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: app
-        image: nginx:1.25
+        image: nginx:1.26  # вместо nginx:1.25
         ports:
         - containerPort: 80
 ---
