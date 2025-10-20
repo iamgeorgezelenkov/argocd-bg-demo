@@ -1,19 +1,19 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Rollout
-meta
+metadata:
   name: demo-app
 spec:
   replicas: 2
   strategy:
     blueGreen:
       activeService: demo-app
-      previewService: demo-app-preview  # опционально
-      autoPromotionEnabled: true        # сразу переключать (для демо)
+      previewService: demo-app-preview
+      autoPromotionEnabled: true
   selector:
     matchLabels:
       app: demo-app
   template:
-    meta
+    metadata:
       labels:
         app: demo-app
     spec:
@@ -25,7 +25,7 @@ spec:
 ---
 apiVersion: v1
 kind: Service
-meta
+metadata:
   name: demo-app
 spec:
   type: ClusterIP
@@ -35,10 +35,9 @@ spec:
   selector:
     app: demo-app
 ---
-# Опционально: preview-сервис для ручной проверки
 apiVersion: v1
 kind: Service
-meta
+metadata:
   name: demo-app-preview
 spec:
   type: ClusterIP
@@ -47,4 +46,3 @@ spec:
     targetPort: 80
   selector:
     app: demo-app
-    rollouts-pod-template-hash: <hash>  # Argo Rollouts подставит автоматически
