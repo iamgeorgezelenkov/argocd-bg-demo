@@ -8,7 +8,8 @@ spec:
     blueGreen:
       activeService: demo-app
       previewService: demo-app-preview
-      autoPromotionEnabled: true
+      autoPromotionEnabled: false  # РУЧНОЕ переключение
+      previewReplicaCount: 1       # 1 под для preview
   selector:
     matchLabels:
       app: demo-app
